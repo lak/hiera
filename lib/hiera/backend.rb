@@ -62,6 +62,11 @@ class Hiera
                         var = $1
                         val = scope[var] || extra_data[var] || ""
 
+                        # This is for Puppet
+                        if val == :undefined
+                          val = ""
+                        end
+
                         tdata.gsub!(/%\{#{var}\}/, val)
                     end
                 end
